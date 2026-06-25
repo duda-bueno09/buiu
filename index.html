@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Senhas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <p class="eyebrow">Segurança digital</p>
+    <h1>Gerador de Senhas</h1>
+  </header>
+
+  <div class="card">
+
+    <!-- Output -->
+    <div class="output-wrap">
+      <div class="output" id="output">Clique em gerar senha</div>
+      <button class="copy-btn" id="copy-btn" title="Copiar senha" aria-label="Copiar senha">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Strength -->
+    <div class="strength-bars">
+      <div class="strength-bar" id="sb1"></div>
+      <div class="strength-bar" id="sb2"></div>
+      <div class="strength-bar" id="sb3"></div>
+      <div class="strength-bar" id="sb4"></div>
+    </div>
+    <div class="strength-label" id="strength-label"></div>
+
+    <!-- Length -->
+    <div class="slider-row">
+      <span class="slider-label">Comprimento</span>
+      <input type="range" id="len-range" min="6" max="64" value="16" step="1">
+      <span class="slider-val" id="len-val">16</span>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Options -->
+    <div class="options-grid">
+      <label class="opt-label"><input type="checkbox" id="opt-upper" checked> Maiúsculas A–Z</label>
+      <label class="opt-label"><input type="checkbox" id="opt-lower" checked> Minúsculas a–z</label>
+      <label class="opt-label"><input type="checkbox" id="opt-num" checked> Números 0–9</label>
+      <label class="opt-label"><input type="checkbox" id="opt-sym" checked> Símbolos !@#…</label>
+      <label class="opt-label"><input type="checkbox" id="opt-noamb"> Excluir ambíguos</label>
+    </div>
+
+    <!-- Presets -->
+    <p class="presets-label">Perfis rápidos</p>
+    <div class="presets">
+      <button class="btn-preset pin"    data-len="6"  data-upper="false" data-lower="false" data-num="true"  data-sym="false">PIN</button>
+      <button class="btn-preset wifi"   data-len="12" data-upper="true"  data-lower="true"  data-num="true"  data-sym="false">Wi-Fi</button>
+      <button class="btn-preset bank"   data-len="20" data-upper="true"  data-lower="true"  data-num="true"  data-sym="true">Bancária</button>
+      <button class="btn-preset master" data-len="32" data-upper="true"  data-lower="true"  data-num="true"  data-sym="true">Mestre</button>
+    </div>
+
+    <!-- Generate -->
+    <button class="btn-generate" id="gen-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+      </svg>
+      Gerar senha
+    </button>
+
+    <div class="toast" id="toast"></div>
+
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

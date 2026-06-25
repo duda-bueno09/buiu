@@ -1,0 +1,425 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:      #0d0d14;
+  --surface: #14141f;
+  --card:    #1a1a28;
+  --border:  #2a2a40;
+  --accent:  #7c6fff;
+  --accent2: #ff6fbd;
+  --green:   #6fffc4;
+  --amber:   #ffca6f;
+  --text:    #e8e8f0;
+  --muted:   #6b6b8a;
+  --radius:  12px;
+}
+
+/* ─── Base ─────────────────────────────────────────────────────── */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* Grade decorativa de fundo */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Layout ────────────────────────────────────────────────────── */
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ─── Cabeçalho ─────────────────────────────────────────────────── */
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header .eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text) 40%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Card ──────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.75rem;
+}
+
+/* ─── Campo de saída da senha ───────────────────────────────────── */
+
+.output-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.output {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 3.5rem 1rem 1rem;
+  color: var(--green);
+  word-break: break-all;
+  min-height: 56px;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+
+.output:hover {
+  border-color: var(--accent);
+}
+
+/* ─── Botão copiar (ícone) ──────────────────────────────────────── */
+
+.copy-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+}
+
+.copy-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.copy-btn:hover {
+  color: var(--green);
+  background: rgba(111, 255, 196, 0.08);
+}
+
+/* ─── Medidor de força ──────────────────────────────────────────── */
+
+.strength-bars {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.4s ease;
+}
+
+.strength-label {
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  color: var(--muted);
+  text-align: right;
+  margin-bottom: 1.25rem;
+  min-height: 14px;
+}
+
+/* ─── Slider de comprimento ─────────────────────────────────────── */
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.slider-label {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.slider-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 28px;
+  text-align: right;
+}
+
+input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--card);
+  box-shadow: 0 0 0 3px rgba(124, 111, 255, 0.25);
+  transition: box-shadow 0.2s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 0 6px rgba(124, 111, 255, 0.2);
+}
+
+/* ─── Divisor ───────────────────────────────────────────────────── */
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.25rem 0;
+}
+
+/* ─── Checkboxes de opções ──────────────────────────────────────── */
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.opt-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.opt-label:hover {
+  color: var(--text);
+}
+
+.opt-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ─── BOTÕES ────────────────────────────────────────────────────── */
+
+/*
+  Botão principal "Gerar senha"
+  Estilo: borda neon roxa + efeito de luz deslizante (sweep) ao hover.
+  Ao passar o mouse a borda muda para rosa e um brilho externo aparece.
+*/
+.btn-generate {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: color 0.25s, box-shadow 0.25s, border-color 0.25s;
+  box-shadow:
+    0 0 10px rgba(124, 111, 255, 0.15),
+    inset 0 0 10px rgba(124, 111, 255, 0.05);
+}
+
+/* Luz deslizante no hover */
+.btn-generate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(124, 111, 255, 0.18) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.45s ease;
+}
+
+.btn-generate:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-generate:hover {
+  color: #fff;
+  border-color: var(--accent2);
+  box-shadow:
+    0 0 22px rgba(255, 111, 189, 0.35),
+    inset 0 0 14px rgba(255, 111, 189, 0.08);
+}
+
+.btn-generate:active {
+  transform: scale(0.97);
+}
+
+/* ─── Label dos perfis rápidos ──────────────────────────────────── */
+
+.presets-label {
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+/*
+  Botões de perfil rápido
+  Estilo: pílula com borda colorida. Cada um tem sua cor temática.
+  Ao hover: preenchem com a cor e emitem brilho neon externo.
+*/
+.btn-preset {
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid;
+  background: transparent;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-preset:active {
+  transform: scale(0.95);
+}
+
+/* PIN — âmbar/dourado */
+.btn-preset.pin {
+  color: var(--amber);
+  border-color: var(--amber);
+}
+.btn-preset.pin:hover {
+  background: var(--amber);
+  color: #0d0d14;
+  box-shadow: 0 0 14px rgba(255, 202, 111, 0.5);
+}
+
+/* Wi-Fi — roxo */
+.btn-preset.wifi {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.btn-preset.wifi:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(124, 111, 255, 0.5);
+}
+
+/* Bancária — verde */
+.btn-preset.bank {
+  color: var(--green);
+  border-color: var(--green);
+}
+.btn-preset.bank:hover {
+  background: var(--green);
+  color: #0d0d14;
+  box-shadow: 0 0 14px rgba(111, 255, 196, 0.45);
+}
+
+/* Mestre — rosa */
+.btn-preset.master {
+  color: var(--accent2);
+  border-color: var(--accent2);
+}
+.btn-preset.master:hover {
+  background: var(--accent2);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255, 111, 189, 0.5);
+}
+
+/* ─── Toast de confirmação ──────────────────────────────────────── */
+
+.toast {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--green);
+  text-align: center;
+  min-height: 16px;
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Acessibilidade: respeitar preferência por menos movimento ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
